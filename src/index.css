@@ -12,7 +12,7 @@ html {
 }
 
 body {
-  background-color: rgb(219, 230, 253);
+ 
 }
 .navbar{
   font-size: 1.8rem;
@@ -122,6 +122,14 @@ button{
   touch-action: manipulation;
   vertical-align: middle;
 }
+.theme-white{
+  background-color: rgb(219, 230, 253);
+  color: black;
+}
+ .theme-dark{
+  background-color: black;
+  color: white;
+ }
 
 button:hover,
 button:active {

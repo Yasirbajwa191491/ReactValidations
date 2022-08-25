@@ -2,6 +2,7 @@ import React from 'react'
 import {useFormik} from "formik"
 import schema from './components/Yup'
 import InputMask from "react-input-mask";
+import About from './components/About';
  const App = () => {
   const formik=useFormik({
     initialValues:{
@@ -18,9 +19,41 @@ import InputMask from "react-input-mask";
     }
   })
   const {handleSubmit,handleChange,touched,errors,handleBlur}=formik;
+  let clickedClass = "clicked"
+  const body = document.getElementById("root")
+  const lightTheme = "theme-white"
+  const darkTheme = "theme-dark"
+  let theme
+
+  if (localStorage) {
+    theme = localStorage.getItem("theme")
+  }
+
+  if (theme === lightTheme || theme === darkTheme) {
+    body.classList.add(theme)
+  } else {
+    body.classList.add(lightTheme)
+  }
+
+  const switchTheme = e => {
+    if (theme === darkTheme) {
+      body.classList.replace(darkTheme, lightTheme)
+      e.target.classList.remove(clickedClass)
+      localStorage.setItem("theme", "theme-white")
+      theme = lightTheme
+    } else {
+      body.classList.replace(lightTheme, darkTheme)
+      e.target.classList.add(clickedClass)
+      localStorage.setItem("theme", "theme-dark")
+      theme = darkTheme
+    }
+  }
   return (
     <>
       <div className="container stories-div" style={{margin: "auto"}}>
+     <button style={{float:"right"}} onClick={switchTheme}>Enable Dark Mode</button>
+
+
       <div className='card' style={{gridColumn:"auto"}}>
       <form onSubmit={handleSubmit}>
       <label htmlFor="email">Email</label>
@@ -41,7 +74,7 @@ import InputMask from "react-input-mask";
         <button>Submit</button>
         </form>
         </div>
-        
+        <About />
       </div>
     </>
   )
