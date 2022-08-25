@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 const About = () => {
   const [user, setUser] = useState([]);
-  const [mode, setMode] = useState("");
   const showData = async () => {
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -21,16 +20,15 @@ const About = () => {
   }
   useEffect(() => {
     showData();
-    window.addEventListener("storage",(e)=>{
-      setMode(localStorage.getItem("theme"))
-   })
-   console.log(mode);
-  }, [mode]);
+   
+  }, []);
+  
+
   return (
     <>
       <div
         className="container-fluid top-0"
-        style={{ backgroundColor: mode==="theme-dark"? "#15133c" :"#fff" }}
+        style={{ backgroundColor: (localStorage.getItem("theme")==="theme-dark")? "#15133c" :"#fff" }}
       >
         <div
           className="container bg-white"
